@@ -1,0 +1,11 @@
+#SSP
+SELECT order_date, marketing_spend, sessions, data_orders, data_nmv_excl_vat_after_return
+FROM `martech-central-group.martech.monalisa`
+where bu = 'SSP'
+and order_date >= '2023-10-01'
+
+#CDS
+SELECT order_date, marketing_spend, sessions, data_orders, data_nmv_excl_vat_after_return, paid_revenue
+FROM `martech-central-group.martech.monalisa`
+where bu = 'CDS'
+and order_date > '2023-10-01'
