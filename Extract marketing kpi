@@ -1,11 +1,20 @@
 #SSP
 SELECT order_date, marketing_spend, sessions, data_orders, data_nmv_excl_vat_after_return
 FROM `martech-central-group.martech.monalisa`
-where bu = 'SSP'
-and order_date >= '2023-10-01'
+WHERE bu = 'SSP'
+AND order_date >= '2023-10-01'
 
 #CDS
 SELECT order_date, marketing_spend, sessions, data_orders, data_nmv_excl_vat_after_return, paid_revenue
 FROM `martech-central-group.martech.monalisa`
-where bu = 'CDS'
-and order_date > '2023-10-01'
+WHERE bu = 'CDS'
+AND order_date > '2023-10-01'
+
+#With CASE + WHEN for replatforming
+SELECT order_date, marketing_spend, sessions, data_orders, data_nmv_excl_vat_after_return, paid_revenue
+    CASE
+        WHEN order_date > '2023-08-01' AND order_date > '2023-10-01' THEN 'Replatforming'
+        ELSE 'Normal'
+    END AS replatforming_check
+FROM `martech-central-group.martech.monalisa`
+WHERE bu = 'CDS'
