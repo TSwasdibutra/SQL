@@ -3,5 +3,52 @@ select city, gender, height, weight, height/weight
 from patients;
 
 #naming calculated field
+#method 1
 select city, gender, height, weight, height/weight 'portion'
 from patients;
+
+#method 2 = add as
+select city, gender, height, weight, height/weight as 'portion method 2'
+from patients;
+
+#Add select only some row with conditions = WHERE
+#this is the same as filter in excel
+#filter numerical value
+select *
+from patients
+where height >= 150;
+
+#filter string value
+select *
+from patients
+where gender = 'M'
+order by height desc, weight desc;
+
+#Filter 2 conditions = WHERE + AND ***********
+
+
+#Sorting = ORDER BY
+#Ascending = min >> max
+select *
+from patients
+where height > 160
+order by height;
+
+#Descening = max >> min
+select *
+from patients
+where height > 160
+order by height desc;
+
+#ORDER BY 2 columns
+#1 column ascending, 1 column descending
+select *
+from patients
+where height > 170
+order by height, weight desc;
+
+#BOTH columns descending
+select *
+from patients
+where height > 180
+order by height desc, weight desc;
