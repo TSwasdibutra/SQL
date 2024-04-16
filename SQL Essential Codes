@@ -95,3 +95,11 @@ select *
 from patients
 where height > 180
 order by height desc, weight desc;
+
+#Extract weekday(monday - Friday) out of datetime column using weekday() 
+#0 = monday, 6 = sunday
+select birth_date, gender, height, weight, weekday(birth_date) as 'Day_in_week'
+from patients
+where weekday(birth_date) = 0
+order by height desc, weight desc; 
+
