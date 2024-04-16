@@ -1,0 +1,7 @@
+#calculated field
+select city, gender, height, weight, height/weight
+from patients;
+
+#naming calculated field
+select city, gender, height, weight, height/weight 'portion'
+from patients;
