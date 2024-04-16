@@ -25,6 +25,49 @@ where gender = 'M'
 order by height desc, weight desc;
 
 #Filter 2 conditions = WHERE + AND ***********
+select *
+from patients
+where gender = 'F' AND height > 170
+order by height desc, weight desc;
+
+#Filter with datetime column******
+#datetime format in SQL = YY-MM-DD ******
+select *
+from patients
+where gender = 'M' AND birth_date > '2000-01-01'
+order by height desc, weight desc;
+
+#Extract only year portion of datetime using year() function******
+#If type only year, it is number not string like full datetime
+select *
+from patients
+where gender = 'M' AND year(birth_date) = 2000
+order by height desc, weight desc; 
+
+#Filter with rows in between 2 values (> a but < b)
+#Method 1 = where + and
+select *
+from patients
+where height >= 170 AND height < 200
+order by height desc, weight desc;
+
+#Method 2 = where + between + and
+select *
+from patients
+where height BETWEEN 170 AND 200
+order by height desc, weight desc;
+
+#Filter with 3 conditions
+select *
+from patients
+where gender = 'M' AND height > 170 AND height < 200
+order by height desc, weight desc; 
+
+#Filter with 3 conditions with BETWEEN
+select *
+from patients
+where gender = 'M' AND height BETWEEN 170 AND 200
+order by height desc, weight desc; 
 
 
 #Sorting = ORDER BY
