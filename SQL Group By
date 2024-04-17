@@ -1,1 +1,16 @@
+#*****Need to select column for group by and column for calculation
 
+#Group by + aggregate by average value
+SELECT gender, AVG(height)
+from patients
+Group BY gender;
+
+#Group by + aggregate by sum value
+SELECT gender, SUM(height)
+from patients
+Group BY gender;
+
+#Group by + aggregate by count value
+SELECT gender, COUNT(height)
+from patients
+Group BY gender;
