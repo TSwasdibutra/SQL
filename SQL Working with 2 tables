@@ -1,0 +1,13 @@
+#XLOOKUP = INNER JOIN + ON
+#Example 1 = with re-naming the column
+SELECT O.CustomerID, O.OrderDate, C.Country
+FROM Orders AS O
+INNER JOIN Customers AS C 
+ON C.CustomerID = O.CustomerID;
+#AS = การตั้งชื่อ column ให้สั้นจะได้ประหยัดเวลาเขียนโค้ด****
+
+#Example 2 = without renaming the column
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+INNER JOIN Customers
+ON Orders.CustomerID=Customers.CustomerID;
