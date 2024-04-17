@@ -76,7 +76,7 @@ WHERE gender = 'M' or weight >= 70
 order by weight desc
 
 #Filter with many conditions from single column = using WHERE + IN()
-#suitable for scenartio with many conditions to write to save time*******
+#suitable for scenario with many conditions to write to save time*******
 SELECT *
 FROM patients
 WHERE city IN ('Hamilton', 'Athens', 'Dundas')
@@ -112,10 +112,19 @@ order by height desc, weight desc;
 
 #Extract weekday(monday - Friday) out of datetime column using weekday() 
 #0 = monday, 6 = sunday
-select birth_date, gender, height, weight, weekday(birth_date) as 'Day_in_week'
-from patients
-where weekday(birth_date) = 0
-order by height desc, weight desc; 
+SELECT 
+    birth_date, 
+    gender, 
+    height, 
+    weight, 
+    WEEKDAY(birth_date) AS Day_in_week
+FROM 
+    patients
+WHERE 
+    WEEKDAY(birth_date) = 0
+ORDER BY 
+    height DESC, 
+    weight DESC;
 
 #Filter only when start with specific letter = using WHERE + LIKE + a%
 SELECT *
