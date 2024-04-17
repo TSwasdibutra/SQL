@@ -141,6 +141,7 @@ ORDER BY first_name DESC;
 #IF condition = CASE + WHEN + THEN + ELSE + END + AS
 #********CASE WHEN needs to be after SELECT and before FROM only!!
 #****Can only use CASE on the columns that we select
+#Method 1
 SELECT 
     height, 
     weight,
@@ -149,6 +150,18 @@ SELECT
         WHEN weight < 70 THEN 'medium' 
         WHEN weight < 100 THEN 'fat' 
         ELSE 'diabete' 
+    END AS body_type
+FROM patients;
+
+#Method 2
+SELECT
+    height, 
+    weight,
+    CASE 
+        WHEN weight < 60 THEN 'slim'
+        WHEN weight BETWEEN 60 AND 70 THEN 'medium'
+        WHEN weight BETWEEN 70 AND 100 THEN 'fat'
+        ELSE 'diabete'
     END AS body_type
 FROM patients;
 
