@@ -14,3 +14,24 @@ Group BY gender;
 SELECT gender, COUNT(height)
 from patients
 Group BY gender;
+
+#Aggregate more than 1 value
+SELECT gender, SUM(height), AVG(weight)
+from patients
+Group BY gender;
+
+#Combine group by with sorting
+#Example 1
+SELECT gender, SUM(height), AVG(weight)
+from patients
+Group BY gender
+ORDER BY gender DESC;
+
+#Example 2
+SELECT gender, SUM(height), AVG(weight)
+from patients
+Group BY gender
+ORDER BY AVG(weight);
+
+#Combine group by with join from other tables
+
