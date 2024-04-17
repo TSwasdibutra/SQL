@@ -39,5 +39,20 @@ from patients
 WHERE gender = 'M'
 Group BY gender;
 
+#Combine GROUP BY with WHERE with ORDER BY
+SELECT city, AVG(height) AS 'tall', AVG(weight) AS 'fat'
+from patients
+WHERE 'fat' > 60
+GROUP BY city
+ORDER BY 'fat' DESC; 
+
+#Showing only top 5 values = LIMIT 5
+SELECT city, AVG(height) AS 'tall', AVG(weight) AS 'fat'
+from patients
+WHERE 'fat' > 60
+GROUP BY city
+ORDER BY 'fat' DESC
+LIMIT 5; 
+
 #Combine group by with join from other tables
 
