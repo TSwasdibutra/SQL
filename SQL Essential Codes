@@ -69,6 +69,20 @@ from patients
 where gender = 'M' AND height BETWEEN 170 AND 200
 order by height desc, weight desc; 
 
+#Filter with OR conditions
+SELECT * 
+FROM patients
+WHERE gender = 'M' or weight >= 70
+order by weight desc
+
+#Filter with many conditions from single column = using WHERE + IN()
+#suitable for scenartio with many conditions to write to save time*******
+SELECT *
+FROM patients
+WHERE city IN ('Hamilton', 'Athens', 'Dundas')
+ORDER BY weight DESC;
+
+
 
 #Sorting = ORDER BY
 #Ascending = min >> max
@@ -102,4 +116,28 @@ select birth_date, gender, height, weight, weekday(birth_date) as 'Day_in_week'
 from patients
 where weekday(birth_date) = 0
 order by height desc, weight desc; 
+
+#Filter only when start with specific letter = using WHERE + LIKE + a%
+SELECT *
+FROM patients
+WHERE first_name LIKE 'J%'
+ORDER BY first_name DESC;
+
+#Filter only when contain specific letter = using WHERE + LIKE + %a%
+SELECT *
+FROM patients
+WHERE first_name LIKE '%in%'
+ORDER BY first_name DESC;
+
+#IF condition = CASE + WHEN + THEN + ELSE + END + AS
+#********CASE WHEN needs to be after SELECT and before FROM only!!
+SELECT height, weight 
+	case WHEN weight < 60 THEN 'slim' 
+    	WHEN weight < 70 THEN 'medium' 
+        WHEN weight < 100 THEN 'fat' 
+        ELSE 'diabete' 
+END AS 'body_type'
+FROM patients;
+
+
 
