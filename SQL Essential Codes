@@ -165,7 +165,7 @@ SELECT
     END AS body_type
 FROM patients;
 
-#****If wanna select all, need to put , after *
+#****Always need to put , before CASE
 SELECT *,
     CASE 
         WHEN weight < 60 THEN 'slim' 
@@ -175,6 +175,16 @@ SELECT *,
     END AS body_type
 FROM patients;
 
+#Create 2 CASE WHEN at once = want to create 2 new condition columns based on different criteria
+SELECT first_name, last_name, salary,
+    CASE 
+        WHEN salary < 50000 THEN salary*(1.05) 
+        WHEN salary > 50000 THEN salary*(1.07) 
+    END AS New_salary,
+    CASE
+        WHEN dept_id = 6 THEN salary*(0.1)
+    END AS Bonus
+FROM employee_salary;
 
 
 
