@@ -33,5 +33,11 @@ from patients
 Group BY gender
 ORDER BY AVG(weight);
 
+#Combine group by with WHERE condition
+SELECT gender, SUM(height), AVG(weight)
+from patients
+WHERE gender = 'M'
+Group BY gender;
+
 #Combine group by with join from other tables
 
