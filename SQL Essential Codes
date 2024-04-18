@@ -242,6 +242,14 @@ GROUP BY city
 HAVINg YEAR(birth_date) > 2000 AND month(birth_date) between 5 AND 12;
 #*******BETWEEN will include the number specified as well ex. BETWEEN 5 AND 12 means 5, 6, 7, 8, 9, 10, 11, 12
 
+Difference between WHERE vs HAVING
+
+    WHERE = Filter in normal table in excel
+    The WHERE clause is used to filter rows before any grouping or aggregation is performed
+
+    HAVING = Slicer in pivot table in excel
+    The HAVING clause is used to filter rows after the grouping has been applied, typically when using aggregate functions like COUNT, SUM, AVG, etc.
+
 #IF condition = CASE + WHEN + THEN + ELSE + END + AS
 #********CASE WHEN needs to be after SELECT and before FROM only!!
 #****Can only use CASE on the columns that we select
