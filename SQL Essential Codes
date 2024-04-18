@@ -113,7 +113,18 @@ FROM patients
 WHERE city IN ('Hamilton', 'Athens', 'Dundas')
 ORDER BY weight DESC;
 
+#Filter between specific number and Max value 
+#have to SELECT MAX(height) FROM patients in () because the result of that is a single number
+SELECT *
+FROM patients
+WHERE height BETWEEN 200 AND (SELECT MAX(height) FROM patients)
+ORDER BY height DESC;
 
+#Filter between specific number and Min value 
+SELECT *
+FROM patients
+WHERE height BETWEEN (SELECT MIN(height) FROM patients) AND 130
+ORDER BY height DESC;
 
 #Sorting = ORDER BY
 #Ascending = min >> max
