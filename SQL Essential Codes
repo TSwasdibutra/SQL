@@ -207,6 +207,36 @@ WHERE height > 150
 GROUP BY city
 HAVING average_height > 180 AND average_weight > 90;
 
+#Example 3: have 1 slicer as datetime
+#Method 1
+SELECT city, gender, birth_date, AVG(height) AS average_height, AVG(weight) AS average_weight
+FROM patients
+WHERE height > 150
+GROUP BY city
+HAVING birth_date > '2000-01-01';
+
+#Method 2
+SELECT city, gender, birth_date, AVG(height) AS average_height, AVG(weight) AS average_weight
+FROM patients
+WHERE height > 150
+GROUP BY city
+HAVING YEAR(birth_date) > 2000;
+
+#Example 4: have 2 slicers as datetime, 1st slicer = year 2nd slicer = month
+SELECT city, gender, birth_date, AVG(height) AS average_height, AVG(weight) AS average_weight
+FROM patients
+WHERE height > 150
+GROUP BY city
+HAVING YEAR(birth_date) > 2000 AND month(birth_date) > 6;
+
+#Example 5: have 2 slicers as datetime, 1st slicer = year 2nd slicer = month using BETWEEN
+SELECT city, gender, birth_date, AVG(height) AS average_height, AVG(weight) AS average_weight
+FROM patients
+WHERE height > 150
+GROUP BY city
+HAVINg YEAR(birth_date) > 2000 AND month(birth_date) between 5 AND 12;
+#*******BETWEEN will include the number specified as well ex. BETWEEN 5 AND 12 means 5, 6, 7, 8, 9, 10, 11, 12
+
 #IF condition = CASE + WHEN + THEN + ELSE + END + AS
 #********CASE WHEN needs to be after SELECT and before FROM only!!
 #****Can only use CASE on the columns that we select
