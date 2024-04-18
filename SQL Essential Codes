@@ -285,5 +285,8 @@ SELECT first_name, last_name, salary,
     END AS Bonus
 FROM employee_salary;
 
-
+#Extract distinct value from a column = DISTINCT
+#******Use a lot when need to create a sub-table to xlookup
+SELECT DISTINCT city
+FROM patients;
 
