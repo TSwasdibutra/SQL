@@ -2,53 +2,53 @@
 
 #Group by + aggregate by average value
 SELECT gender, AVG(height)
-from patients
+FROM patients
 Group BY gender;
 
 #Group by + aggregate by sum value
 SELECT gender, SUM(height)
-from patients
+FROM patients
 Group BY gender;
 
 #Group by + aggregate by count value
 SELECT gender, COUNT(height)
-from patients
+FROM patients
 Group BY gender;
 
 #Aggregate more than 1 value
 SELECT gender, SUM(height), AVG(weight)
-from patients
+FROM patients
 Group BY gender;
 
 #Combine group by with sorting
 #Example 1
 SELECT gender, SUM(height), AVG(weight)
-from patients
+FROM patients
 Group BY gender
 ORDER BY gender DESC;
 
 #Example 2
 SELECT gender, SUM(height), AVG(weight)
-from patients
+FROM patients
 Group BY gender
 ORDER BY AVG(weight);
 
 #Combine group by with WHERE condition
 SELECT gender, SUM(height), AVG(weight)
-from patients
+FROM patients
 WHERE gender = 'M'
 Group BY gender;
 
 #Combine GROUP BY with WHERE with ORDER BY
 SELECT city, AVG(height) AS 'tall', AVG(weight) AS 'fat'
-from patients
+FROM patients
 WHERE 'fat' > 60
 GROUP BY city
 ORDER BY 'fat' DESC; 
 
 #Showing only top 5 values = LIMIT 5
 SELECT city, AVG(height) AS 'tall', AVG(weight) AS 'fat'
-from patients
+FROM patients
 WHERE 'fat' > 60
 GROUP BY city
 ORDER BY 'fat' DESC
