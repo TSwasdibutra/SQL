@@ -192,6 +192,21 @@ SELECT *
 FROM patients
 WHERE allergies IS NULL;
 
+#Do slicer like in excel in SQL = HAVING
+#Example 1: have only 1 slicer
+SELECT city, AVG(height) AS average_height, AVG(weight) AS average_weight
+FROM patients
+WHERE height > 150
+GROUP BY city
+HAVING average_height > 180;
+
+#Example 2: have 2 slicers
+SELECT city, AVG(height) AS average_height, AVG(weight) AS average_weight
+FROM patients
+WHERE height > 150
+GROUP BY city
+HAVING average_height > 180 AND average_weight > 90;
+
 #IF condition = CASE + WHEN + THEN + ELSE + END + AS
 #********CASE WHEN needs to be after SELECT and before FROM only!!
 #****Can only use CASE on the columns that we select
