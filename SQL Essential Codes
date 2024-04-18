@@ -130,7 +130,12 @@ ORDER BY height DESC;
 #COUNT() AVG() SUM()
 
 #Create new column from combining text of existing columns = CONCAT()
+#Exmaple 1
 SELECT first_name, last_name, concat(first_name, last_name) AS 'full_name'
+FROM patients;
+
+#Example 2
+SELECT first_name, last_name, concat(first_name," ",last_name) AS full_name
 FROM patients;
 
 #Sorting = ORDER BY
