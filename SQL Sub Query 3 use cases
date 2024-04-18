@@ -1,0 +1,18 @@
+Sub query can be used in 3 ways
+
+1. sub query within WHERE
+
+2. sub query within SELECT = เอาไว้ใช้เช่นกรณีอยาก compare ค่า average value ของทั้ง dataset กับค่า groupby
+SELECT city, height, 
+(SELECT AVG(height)
+ FROM patients) AS average_height
+ FROM patients;
+
+3. sub query within FROM = like creating a sub table (ex. pivot table) that you can pull column from
+use case = find the total sum or total average value of the value from pivot table
+https://www.youtube.com/watch?v=Vj6RqA_X-IE&list=PLUaB-1hjhk8G5zci4HA8E21x2BJS3jzNm&index=5
+****CTE can do the same as this and it is better
+SELECT SUM(max_height) 
+FROM (SELECT city, MAX(height) AS max_height
+     FROM patients
+     GROUP BY city);
