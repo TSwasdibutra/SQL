@@ -30,6 +30,12 @@ from patients
 where gender = 'F' AND height > 170
 order by height desc, weight desc;
 
+#FILTER one of the 2 conditions = WHERE + OR ****
+SELECT *
+FROM patients
+WHERE gender = 'F' OR height > 170
+ORDER BY weight DESC;
+
 #Filter with datetime column******
 #datetime format in SQL = YY-MM-DD ******
 select *
@@ -43,6 +49,31 @@ select *
 from patients
 where gender = 'M' AND year(birth_date) = 2000
 order by height desc, weight desc; 
+
+#If type only month, it is number not string like full datetime
+select *
+from patients
+where gender = 'M' AND month(birth_date) = 12
+order by height desc, weight desc; 
+
+#If type only day, it is number not string like full datetime
+select *
+from patients
+where gender = 'M' AND day(birth_date) = 31
+order by height desc, weight desc; 
+
+#Filter both Month and Date at once
+#Example 1
+select *
+from patients
+where month(birth_date) = 5 AND day(birth_date) = 31
+order by height desc;
+
+#Example 2
+select *
+from patients
+where month(birth_date) between 5 AND 8 AND day(birth_date) = 30
+order by height desc; 
 
 #Filter with rows in between 2 values (> a but < b)
 #Method 1 = where + and
