@@ -126,6 +126,13 @@ FROM patients
 WHERE height BETWEEN (SELECT MIN(height) FROM patients) AND 130
 ORDER BY height DESC;
 
+#Other function that can be used apart from MAX() and MIN() are 
+#COUNT() AVG() SUM()
+
+#Create new column from combining text of existing columns = CONCAT()
+SELECT first_name, last_name, concat(first_name, last_name) AS 'full_name'
+FROM patients;
+
 #Sorting = ORDER BY
 #Ascending = min >> max
 select *
@@ -152,7 +159,7 @@ from patients
 where height > 180
 order by height desc, weight desc;
 
-#Extract weekday(monday - Friday) out of datetime column using weekday() 
+#Extract weekday(monday - Friday) out of datetime column using weekday() ***This code is error as there is no WEEKDAY() function
 #0 = monday, 6 = sunday
 SELECT 
     birth_date, 
@@ -179,6 +186,11 @@ SELECT *
 FROM patients
 WHERE first_name LIKE '%in%'
 ORDER BY first_name DESC;
+
+#Filter only NULL value = IS + NULL
+SELECT *
+FROM patients
+WHERE allergies IS NULL;
 
 #IF condition = CASE + WHEN + THEN + ELSE + END + AS
 #********CASE WHEN needs to be after SELECT and before FROM only!!
