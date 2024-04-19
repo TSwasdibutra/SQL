@@ -15,6 +15,11 @@ from patients;
 SELECT DISTINCT city
 FROM patients;
 
+#Select column with all values except certain value = WHERE + NOT
+SELECT *
+FROM patients
+WHERE NOT CITY = 'Barrie';
+
 #Add select only some row with conditions = WHERE
 #this is the same as filter in excel
 #filter numerical value
