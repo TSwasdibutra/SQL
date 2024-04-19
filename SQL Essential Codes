@@ -211,6 +211,11 @@ SELECT *
 FROM Customers
 WHERE City Like 'a%b';
 
+#Select all records where the value of the City column does NOT start with the letter "a". = using WHERE + column name + NOT + LIKE
+SELECT * 
+FROM Customers
+WHERE City NOT LIKE 'a%';
+
 #Filter only NULL value = IS + NULL
 SELECT *
 FROM patients
