@@ -114,6 +114,17 @@ from patients
 where gender = 'M' AND height BETWEEN 170 AND 200
 order by height desc, weight desc; 
 
+#use the BETWEEN operator to select all the records where the value of the Price column is NOT between 10 and 20.
+SELECT * 
+FROM Products
+WHERE Price NOT BETWEEN 10 AND 20;
+
+#Use BETWEEN on string value
+SELECT * FROM Products
+WHERE ProductName 
+BETWEEN 'Geitost' AND 'Pavlova'
+;
+
 #Filter with OR conditions
 SELECT * 
 FROM patients
