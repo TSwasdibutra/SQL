@@ -20,6 +20,11 @@ SELECT *
 FROM patients
 WHERE NOT CITY = 'Barrie';
 
+#Select all records from the Customers where the PostalCode column is NOT empty. = WHERE + IS + NOT
+SELECT *
+FROM patients
+WHERE CITY IS NOT NULL;
+
 #Add select only some row with conditions = WHERE
 #this is the same as filter in excel
 #filter numerical value
