@@ -206,6 +206,11 @@ FROM patients
 WHERE first_name LIKE '%in%'
 ORDER BY first_name DESC;
 
+#Filter only when start with a and ends with b = using WHERE + LIKE + a%b
+SELECT * 
+FROM Customers
+WHERE City Like 'a%b';
+
 #Filter only NULL value = IS + NULL
 SELECT *
 FROM patients
