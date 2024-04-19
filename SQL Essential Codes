@@ -11,6 +11,10 @@ from patients;
 select city, gender, height, weight, height/weight as 'portion method 2'
 from patients;
 
+#Select all the different values from the column
+SELECT DISTINCT city
+FROM patients;
+
 #Add select only some row with conditions = WHERE
 #this is the same as filter in excel
 #filter numerical value
