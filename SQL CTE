@@ -1,0 +1,56 @@
+#CTE for SQL = CTE  + AS + (query for sub-table) + general query
+**CTE is used to create a sub-table to perform more complicated stuff later
+it is a more popular replacement for sub-query function
+**CTE have to be used immediately, so cannot put ; right after CTE. 
+have to put main query that we wanna do right after CTE then ends the main query with ;
+**Temp table = similar to CTE but we actually create a temporaly table
+
+#Example 1 : 1 CTE
+WITH cte_1 as 
+(SELECT patient_id, first_name, last_name, gender, height, weight
+ FROM patients
+ WHERE height > 150
+  )
+  
+SELECT gender, AVG(height), AVG(weight) 
+FROM cte_1
+GROUP BY gender;
+
+Example 2.1: Multiple CTEs 
+**have to put , after cte 1 before creating cte2
+
+WITH cte_example_1 AS
+( SELECT  *
+FROM table
+WHERE salary >= 80000
+),
+
+cte_example_2 AS
+(SELECT *
+FROM table2
+WHERE gender = ‘male’
+)
+
+SELECT *
+FROM cte_example_1
+JOIN cte_example_2
+      ON cte_example_1.id = cte_example_2.id;
+
+Example 2.2: Multiple CTEs******* This one is better than Example 2.1
+WITH cte_1 as 
+(SELECT patient_id, first_name, last_name, gender, height
+ FROM patients
+ WHERE height > 150
+),
+  
+cte_2 AS 
+(SELECT patient_id, weight
+FROM patients
+)
+  
+SELECT cte_1.patient_id, cte_1.first_name, cte_1.last_name, cte_1.gender, cte_1.height, cte_2.weight
+FROM cte_1
+LEFT JOIN cte_2 
+ON cte_1.patient_id = cte_2.patient_id
+ORDER BY height DESC;
+
