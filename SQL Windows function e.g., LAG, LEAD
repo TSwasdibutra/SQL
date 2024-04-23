@@ -1,0 +1,33 @@
+#LAG() function = LAG() + OVER(ORDER BY) + AS
+#LAG() = put column name that wanna show previous value
+#OVER(ORDER BY) = put columan name that want the lag command to follow the order
+#AS = name of the newly created column of lagged value
+
+#Case 1 - Lag of 1 value
+SELECT patient_id, city, 
+	LAG(city)
+	OVER(ORDER BY patient_id)
+	AS lag_city
+FROM patients;
+
+#Case 2 - Lag of >1 value ex. 4 value
+SELECT patient_id, city, 
+	LAG(city, 4)
+	OVER(ORDER BY patient_id)
+	AS lag_city
+FROM patients;
+
+#LEAD() function = LEAD() + OVER(ORDER BY) + AS
+#Case 1 - Lead of 1 value
+SELECT patient_id, city, 
+	LEAD(city)
+	OVER(ORDER BY patient_id)
+	AS lead_city
+FROM patients;
+
+#Case 2 - Lead of >1 value ex. 4 value
+SELECT patient_id, city, 
+	LEAD(city, 4)
+	OVER(ORDER BY patient_id)
+	AS lead_city
+FROM patients;
