@@ -18,3 +18,36 @@ SELECT order_date, marketing_spend, sessions, data_orders, data_nmv_excl_vat_aft
     END AS replatforming_check
 FROM `martech-central-group.martech.monalisa`
 WHERE bu = 'CDS'
+
+#Changes of Month to Month
+WITH cte AS
+(
+SELECT ID, MONTH(Datejoined) AS m 
+FROM maintable_8WNZJ
+),
+
+cte_2 AS
+(
+SELECTm, count(m) AS c,
+CASE WHEN m = 1 THEN 'Jan'
+WHEN m = 2 THEN 'Feb'
+WHEN m = 3 THEN 'Mar'
+WHEN m = 4 THEN 'Apr'
+WHEN m = 5 THEN 'May'
+END AS 'Month'
+FROM cte
+GROUP BY m
+),
+
+cte_3 AS
+(
+SELECT m, Month, c,
+LAG(c, 1, 0)
+OVER(ORDER BY m)
+AS lag_c
+FROM cte_2
+)
+
+SELECT Month, c - lag_c AS MonthToMonthChange
+FROM CTE_3
+WHERE m>= 2;
