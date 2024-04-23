@@ -32,6 +32,11 @@ SELECT patient_id, city,
 	AS lead_city
 FROM patients;
 
+Case 3 = get LAG value for each city
+SELECT *, 
+LAG(weight) OVER(PARTITION BY city ORDER BY patient_id)
+FROM patients;
+
 #Show MAX value of the whole group as a column next to the full table
 #this can NOT be done by GROUP BY
 #OVER() is the command to put all this value across rows in the table (like for loop in Python)
@@ -100,5 +105,6 @@ FROM cte
 WHERE d_ranking < 4;
 
 ********NO need to put value within RANK() DENSE_RANK() ROW_NUMBER()
+********LEAD() LAG() RANK() DENSE_RANK() ROW_NUMBER() ต้องอยู่ใน SELECT เท่านั้น
 
 
