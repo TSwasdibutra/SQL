@@ -15,10 +15,20 @@ from patients;
 SELECT DISTINCT city
 FROM patients;
 
-#Select column with all values except certain value = WHERE + NOT
+#Select column with all values except certain value = WHERE + NOT + categorical value
 SELECT *
 FROM patients
 WHERE NOT CITY = 'Barrie';
+
+#Select column with all values except certain value = WHERE + NOT + IN + many categorical values
+SELECT *
+FROM patients
+WHERE NOT CITY IN ('Barrie', 'Dundas');
+
+#Select column with all values except certain value = WHERE + NOT + numerical value
+SELECT *
+FROM patients
+WHERE NOT weight BETWEEN 100 AND 105;
 
 #Select all records from the Customers where the PostalCode column is NOT empty. = WHERE + IS + NOT
 SELECT *
@@ -115,9 +125,15 @@ where gender = 'M' AND height BETWEEN 170 AND 200
 order by height desc, weight desc; 
 
 #use the BETWEEN operator to select all the records where the value of the Price column is NOT between 10 and 20.
+#Method 1
 SELECT * 
 FROM Products
 WHERE Price NOT BETWEEN 10 AND 20;
+
+#Method 2
+SELECT * 
+FROM Products
+WHERE NOT Price BETWEEN 10 AND 20;
 
 #Use BETWEEN on string value
 SELECT * FROM Products
@@ -255,6 +271,7 @@ WHERE allergies IS NULL;
 
 #Do slicer like in excel in SQL = HAVING
 #Example 1: have only 1 slicer
+***HAVING กับ GROUP BY ต้องมีชื่อคอลัมนั้นๆอยู่ใน SELECT  ก่อนถึงจะใช้ได้
 SELECT city, AVG(height) AS average_height, AVG(weight) AS average_weight
 FROM patients
 WHERE height > 150
