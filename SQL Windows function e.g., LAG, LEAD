@@ -34,7 +34,7 @@ FROM patients;
 
 Case 3 = get LAG value for each city
 SELECT *, 
-LAG(weight) OVER(PARTITION BY city ORDER BY patient_id)
+LAG(weight) OVER(PARTITION BY city ORDER BY patient_id) AS lag_weight
 FROM patients;
 
 #Show MAX value of the whole group as a column next to the full table
@@ -106,5 +106,6 @@ WHERE d_ranking < 4;
 
 ********NO need to put value within RANK() DENSE_RANK() ROW_NUMBER()
 ********LEAD() LAG() RANK() DENSE_RANK() ROW_NUMBER() ต้องอยู่ใน SELECT เท่านั้น
+********PARTITION BY() คือทำหน้าที่เป็นตัวบอกว่าจะให้รันคำสั่งเช่น LAG() ภายใน category value นึง แล้วเริ่มนับหนึ่งใหม่เมื่อขึ้น category value ใหม่
 
 
