@@ -1,6 +1,6 @@
 #LAG() function = LAG() + OVER(ORDER BY) + AS
 #LAG() = put column name that wanna show previous value
-#OVER(ORDER BY) = put columan name that want the lag command to follow the order
+#OVER(ORDER BY) = put colum n name that want the lag command to follow the order
 #AS = name of the newly created column of lagged value
 
 #Case 1 - Lag of 1 value
@@ -36,6 +36,31 @@ Case 3 = get LAG value for each city
 SELECT *, 
 LAG(weight) OVER(PARTITION BY city ORDER BY patient_id) AS lag_weight
 FROM patients;
+
+Case 4 = want to put 0 for NULL value
+SELECT *, 
+LAG(weight, 1, 0) OVER(PARTITION BY city ORDER BY patient_id) AS lag_weight
+FROM patients;
+*****1 คือจำนวน Lag ส่วน 0 คือค่าที่อยากให้ใส่แทน NULL 
+
+#Interview question for LAG() and LEAD() - fetch a query to display if the height of people is higher, lower, or equal to the previous people.
+#This is using LAG() with CASE WHEN
+*********Will face this question for sure
+WITH cte AS 
+(
+SELECT *, 
+LAG(weight, 1, 0) OVER(PARTITION BY city ORDER BY patient_id) AS lag_weight
+FROM patients
+)
+
+SELECT *,
+CASE WHEN weight > lag_weight THEN 'higher'
+	WHEN weight < lag_weight THEN 'lower'
+    WHEN weight = lag_weight THEN 'equal'
+	ELSE 'nani?'
+	END AS compare
+FROM cte;
+
 
 #Show MAX value of the whole group as a column next to the full table
 #this can NOT be done by GROUP BY
