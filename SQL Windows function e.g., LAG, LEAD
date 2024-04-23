@@ -45,10 +45,17 @@ SELECT patients.*,
 MAX(height) OVER() AS max_height
 FROM patients;
 
-#Show MAX value of only each category from a selected column ex. Max value for Male and Female column
+#Show MAX value of only each category from a selected column ex. Max value for Male and Female column****
 #PARTITION BY = to tell OVER which column of category we want to calculate max value from
 **Very similar to Group BY function but the different is that we do not mush the data
 # can alo use MIN() SUM() COUNT()
 SELECT *,
 MAX(height) OVER(PARTITION BY gender) AS max_height
 FROM patients;
+
+#Assign rankinh number for only each value from categorical column = use row_number() + ORDER(PARTITION BY) + AS
+#count 1, 2, 3 for each category, if start new category then number will start at 1 again
+SELECT *, 
+ROW_NUMBER() OVER(PARTITION BY gender) AS 
+FROM patients;
+
