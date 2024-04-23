@@ -53,9 +53,52 @@ SELECT *,
 MAX(height) OVER(PARTITION BY gender) AS max_height
 FROM patients;
 
-#Assign rankinh number for only each value from categorical column = use row_number() + ORDER(PARTITION BY) + AS
+#Assign ranking number for only each value from categorical column = use row_number() + ORDER(PARTITION BY) + AS
 #count 1, 2, 3 for each category, if start new category then number will start at 1 again
 SELECT *, 
-ROW_NUMBER() OVER(PARTITION BY gender) AS 
+ROW_NUMBER() OVER(PARTITION BY gender) AS gender_number
 FROM patients;
+
+#Same command from above but sort the data by adding ORDER BY**********
+SELECT *, 
+ROW_NUMBER() OVER(PARTITION BY gender ORDER BY patient_id) AS gender_number
+FROM patients;
+
+#Fetch first 2 employees from each city = Use ROW_NUMBER() + OVER(PATRITION BY) + AS with CTE
+WITH cte AS 
+(SELECT *, 
+ROW_NUMBER() OVER(PARTITION BY city ORDER BY patient_id) AS city_number
+FROM patients
+)
+
+SELECT *
+FROM cte
+WHERE city_number <= 2;
+
+#Fetch top 3 people from each city having highest wage = using RANK() function ********** this questino will come for sure
+WITH cte AS 
+(
+SELECT *,
+RANK() OVER(PARTITION BY city ORDER BY height DESC) AS ranking
+FROM patients
+ )
+ 
+SELECT *
+FROM cte
+WHERE ranking < 4;
+
+**DENSE_RANK() คล้าย RANK() ทุกอย่าง แค่จะไม่ slip value เวลามีค่าซ้ำกัน 
+WITH cte AS 
+(
+SELECT *,
+DENSE_RANK() OVER(PARTITION BY city ORDER BY height DESC) AS d_ranking
+FROM patients
+ )
+ 
+SELECT *
+FROM cte
+WHERE d_ranking < 4;
+
+********NO need to put value within RANK() DENSE_RANK() ROW_NUMBER()
+
 
