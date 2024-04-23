@@ -31,3 +31,22 @@ SELECT patient_id, city,
 	OVER(ORDER BY patient_id)
 	AS lead_city
 FROM patients;
+
+#Show MAX value of the whole group as a column next to the full table
+#this can NOT be done by GROUP BY
+#OVER() is the command to put all this value across rows in the table (like for loop in Python)
+#Way 1 to write: 
+SELECT *,
+MAX(height) OVER() AS max_height
+FROM patients;
+
+#Way 2 to write
+SELECT patients.*,
+MAX(height) OVER() AS max_height
+FROM patients;
+
+#Show MAX value of only each category from a selected column ex. Max value for Male and Female column
+#PARTITION BY = to tell OVER which column of category we want to calculate max value from
+SELECT *,
+MAX(height) OVER(PARTITION BY gender) AS max_height
+FROM patients;
