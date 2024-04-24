@@ -71,6 +71,8 @@ SELECT *,
 MAX(height) OVER() AS max_height
 FROM patients;
 
+***No need to put ORDER BY in OVER() because MAX(height) is a single value so NO need to order the value based on anything
+
 #Way 2 to write
 SELECT patients.*,
 MAX(height) OVER() AS max_height
