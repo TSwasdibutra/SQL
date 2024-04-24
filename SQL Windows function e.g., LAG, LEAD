@@ -32,12 +32,13 @@ SELECT patient_id, city,
 	AS lead_city
 FROM patients;
 
-Case 3 = get LAG value for each city
+#Case 3 = get LAG value for each city
+********PARTITION BY คือให้เริ่มนับ LAG ใหม่ตามค่าใน column ที่ใส่ใน PARTITION BY*******
 SELECT *, 
 LAG(weight) OVER(PARTITION BY city ORDER BY patient_id) AS lag_weight
 FROM patients;
 
-Case 4 = want to put 0 for NULL value
+#Case 4 = want to put 0 for NULL value
 SELECT *, 
 LAG(weight, 1, 0) OVER(PARTITION BY city ORDER BY patient_id) AS lag_weight
 FROM patients;
