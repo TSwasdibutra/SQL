@@ -12,7 +12,7 @@ ON C.CustomerID = O.CustomerID;
 SELECT O.CustomerID, O.OrderDate, C.Country
 FROM Orders AS O
 INNER JOIN Customers AS C 
-ON C.CustomerID = O.CustomerID;
+ON O.CustomerID = C.CustomerID;
 
 #Example 2 = without renaming the column
 SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
