@@ -135,5 +135,8 @@ WHERE d_ranking < 4;
 ********NO need to put value within RANK() DENSE_RANK() ROW_NUMBER()
 ********LEAD() LAG() RANK() DENSE_RANK() ROW_NUMBER() ต้องอยู่ใน SELECT เท่านั้น
 ********PARTITION BY() คือทำหน้าที่เป็นตัวบอกว่าจะให้รันคำสั่งเช่น LAG() ภายใน category value นึง แล้วเริ่มนับหนึ่งใหม่เมื่อขึ้น category value ใหม่
-
+********ROW_NUMBER() VS RANK() VS DENSE_RANK() https://www.youtube.com/watch?v=v8C3xEvlwgE
+	- ROWNUMBER(): จะไม่ให้เลขซ้ำเลย แม้ค่าที่ใส่ใน ROWNUMBER() จะซ้ำกัน
+	- RANK(): จะให้เลขซ้ำเมื่อค่าที่ใส่ใน RANK() ซ้ำกัน แล้วจะ skip เลข rank เช่น 1, 2, 2, 4, 5
+	- DENSE_RANK(): จะให้เลขซ้ำเมื่อค่าที่ใส่ใน RANK() ซ้ำกัน แต่จะไม่ skip เลข rank เช่น 1, 2, 2, 3, 4
 
