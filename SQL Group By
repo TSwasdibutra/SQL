@@ -54,5 +54,10 @@ GROUP BY city
 ORDER BY 'fat' DESC
 LIMIT 5; 
 
-#Combine group by with join from other tables
+#Combine GROUP BY with WHERE with HAVING
+#can HAVING any column, does not have to be only column from SELECT
+SELECT gender, sum(height) AS h, COUNT(weight) AS w
+FROM patients
+GROUP BY gender
+HAVING city = 'Barrie';
 
