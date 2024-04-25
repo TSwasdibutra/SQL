@@ -169,6 +169,7 @@ ORDER BY height DESC;
 
 #Other function that can be used apart from MAX() and MIN() are 
 #COUNT() AVG() SUM()
+****when use COUNT() always put DISTINCT inside
 
 #Create new column from combining text of existing columns = CONCAT()
 #Exmaple 1 
