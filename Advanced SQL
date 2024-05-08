@@ -1,0 +1,82 @@
+##Number of Order for "Cyber Source" as Payment Method having absolute discount > $5 and purchased only using IosApp and AndroidApp. You will need to show this breakdown by device type and delivery type 
+
+WITH cte AS
+(
+SELECT c.Order_Number, c.Discount , c.Payment_Method, c.Device_Type, o.Delivery_Type
+FROM [Commercial Table] AS c
+LEFT JOIN [Ops Table] as o
+ON c.Order_Number = o.Order_Number
+)
+
+SELECT Device_Type, Delivery_Type, COUNT(DISTINCT Order_Number) AS order_count
+FROM cte
+WHERE Payment_Method = 'Cybersource' AND Device_Type IN ('iosApp', 'androidApp')
+GROUP BY 1, 2
+HAVING SUM(Discount) > 5
+ORDER BY 1, 2;
+
+--I put [] on Commercial Table and Ops Table to avoid error as normally, table name should not have space-- 
+
+##Number of Orders with (1) device type desktop and absolute discount <$2 (2) device type desktop and absolute discount $2 - $3.5 (3) device type AndroidApp and absolute discount >$3.5 (4) everything else as 'others'
+
+SELECT
+    CASE 
+        WHEN Device_Type = 'desktop' AND Discount < 2  THEN '1'
+        WHEN Device_Type = 'desktop' AND Discount BETWEEN 2 AND 3.5 THEN '2'
+        WHEN Device_Type = 'androidApp' AND Discount > 3.5 THEN '3'
+        ELSE 'others'
+    END AS Scenario,
+    COUNT(Order_Number) AS Number_of_Order
+FROM [Commercial Table]
+GROUP BY Scenario
+ORDER BY Scenario;
+
+--I put [] on Commercial Table to avoid error as normally, table name should not have space-- 
+
+##Find the top 5 revenue generating SKU ('SKU_ID') for each device type and sort then in descending order of their revenue
+
+WITH cte AS 
+(
+    SELECT
+        Device_Type,
+        SKU_ID,
+        SUM(Revenue) AS total_revenue,
+        ROW_NUMBER() OVER(PARTITION BY Device_Type ORDER BY SUM(Revenue) DESC) AS ranking
+    FROM [Commercial Table]
+    GROUP BY Device_Type, SKU_ID
+)
+
+SELECT Device_Type, SKU_ID, total_revenue
+FROM cte
+WHERE ranking <= 5
+ORDER BY Device_Type, total_revenue DESC;
+
+--I put [] on Commercial Table to avoid error as normally, table name should not have space-- 
+
+##Order numbers with more than one item and the product_name of the most expensinve item in that order
+
+
+WITH cte1 AS 
+(
+    SELECT Order_Number, COUNT(DISTINCT SKU_ID)
+    FROM [Commercial Table]
+    GROUP BY Order_Number
+    HAVING COUNT(DISTINCT SKU_ID) > 1
+), 
+
+cte2 AS 
+(
+    SELECT 
+        c.Order_Number, 
+        c.SKU_ID,
+        RANK() OVER(PARTITION BY c.Order_Number ORDER BY c.Unit_Price DESC) AS r
+    FROM [Commercial Table] AS c
+    JOIN cte1 
+    ON c.Order_Number = cte1.Order_Number
+)
+
+SELECT Order_Number, SKU_ID
+FROM cte2
+WHERE r = 1;
+--I put [] on Commercial Table to avoid error as normally, table name should not have space--
+
